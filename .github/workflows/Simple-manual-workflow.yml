@@ -22,7 +22,7 @@ jobs:
         run: dotnet restore ./WebApp/WebApp.sln
       
       - name: Build
-        run: dotnet build ./WebApp.sln --configuration Release --no-restore
+        run: dotnet build ./WebApp/WebApp.sln --configuration Release --no-restore
       
       - name: Publish
         run: dotnet publish ./WebApp.WebApp.sln --configuration Release --no-build
