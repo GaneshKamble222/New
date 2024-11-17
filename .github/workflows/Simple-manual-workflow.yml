@@ -1,7 +1,6 @@
 name: Simple manual workflow - Three Env
 
 on:
-  workflow_dispatch:
   pull_request:
     branches:
       -main
