@@ -1,36 +1,28 @@
-name: Simple manual workflow - Three Env
+name: Publish 🚀
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
 
 jobs:
-  DEV:
+  publish:
     runs-on: ubuntu-latest
-    environment: DEV
-    steps:
-      - uses: actions/checkout@v2
-      - name: Run a script
-        run: 
-          echo "I am running a job in the DEV Env"
 
-  QA:
-    runs-on: ubuntu-latest
-    environment: QA
-    needs: DEV
     steps:
-      - uses: actions/checkout@v2
-      - name: Run a script
-        run: 
-          echo "I am running a job in the QA Env"
-
-  PROD:
-    runs-on: ubuntu-latest
-    environment: PROD
-    needs: QA
-    steps:
-      - uses: actions/checkout@v2
-      - name: Run a script
-        run: 
-          echo "I am running a job in the PROD Env"
+      - uses: actions/checkout@v3
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x'
+      
+      - name: Restore
+        run: dotnet restore ./WebApp.sln
+      
+      - name: Build
+        run: dotnet build ./WebApp.sln --configuration Release --no-restore
+      
+      - name: Publish
+        run: dotnet publish ./WebApp.sln --configuration Release --no-build
