@@ -19,7 +19,7 @@ jobs:
           dotnet-version: '6.0.x'
       
       - name: Restore
-        run: dotnet restore ./WebApp.sln
+        run: dotnet restore .WebApp/WebApp.sln
       
       - name: Build
         run: dotnet build ./WebApp.sln --configuration Release --no-restore
